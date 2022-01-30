@@ -29,7 +29,8 @@ defmodule ConnectedNodesDashboard.MixProject do
   defp deps do
     [
       {:phoenix_live_dashboard, "~> 0.5"},
-      {:floki, ">= 0.30.0", only: :test}
+      {:floki, ">= 0.30.0", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
