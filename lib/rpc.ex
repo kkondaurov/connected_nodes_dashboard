@@ -43,6 +43,11 @@ defmodule ConnectedNodesDashboard.RPC do
 
     data =
       case raw_data do
+        {:badrpc, :timeout} ->
+          Logger.warn("#{__MODULE__} call to node #{inspect(node)} timed out")
+
+          timeout_info(node)
+
         {:badrpc, reason} ->
           Logger.warn("#{__MODULE__} call to node #{inspect(node)} failed: #{inspect(reason)}")
 
@@ -69,7 +74,15 @@ defmodule ConnectedNodesDashboard.RPC do
     }
   end
 
-  def badrpc_node_info(node) do
+  defp badrpc_node_info(node) do
+    %{
+      :name => node,
+      :hostname => nil,
+      :uptime => nil
+    }
+  end
+
+  defp timeout_info(node) do
     %{
       :name => "#{node} (timeout)",
       :hostname => nil,
