@@ -2,6 +2,10 @@
 
 An additional page for [Phoenix LiveDashboard](https://github.com/phoenixframework/phoenix_live_dashboard/) with information about connected nodes.
 
+For example, an app deployed to [fly.io](https://fly.io) as a cluster in 3 regions, one of which has a remote console running and an attached Livebook session, would look like this:
+
+![Example screenshot](https://github.com/kkondaurov/connected_nodes_dashboard/raw/main/example.png)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -38,3 +42,13 @@ live_dashboard "/live_dashboard",
 ```
 
 Please note that since LiveDashboard table component requires fields to be atoms, `env_vars` elements should also be atoms - the library ignores string keys.
+
+In the above example, `env_vars` is set up like this:
+
+```elixir
+live_dashboard "/live_dashboard",
+  # ...
+  additional_pages: [
+    connected_nodes: {ConnectedNodesDashboard.Page, env_vars: [:FLY_REGION, :FLY_ALLOC_ID]}
+  ]
+```
