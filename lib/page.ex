@@ -96,7 +96,7 @@ defmodule ConnectedNodesDashboard.Page do
     field_row
     |> Enum.map(fn field ->
       card(
-        inner_title: field,
+        inner_title: Phoenix.Naming.humanize(field),
         value: current_node_info[field]
       )
     end)
@@ -160,7 +160,7 @@ defmodule ConnectedNodesDashboard.Page do
     for env_var <- env_vars,
         do: %{
           field: env_var,
-          header: env_var
+          header: Phoenix.Naming.humanize(env_var)
         }
   end
 
